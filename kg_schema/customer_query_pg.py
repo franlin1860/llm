@@ -3,10 +3,7 @@ import sys
 import logging
 from llama_index.core import Settings
 from llama_index.embeddings.huggingface import HuggingFaceEmbedding
-from llama_index.core.query_engine import RetrieverQueryEngine
 from llama_index.core import StorageContext
-from llama_index.core import load_index_from_storage
-from llama_index.core.query_engine import KnowledgeGraphQueryEngine
 from llama_index.llms.openai_like import OpenAILike
 from llama_index.graph_stores.neo4j import Neo4jPropertyGraphStore
 from llama_index.core.indices.property_graph import LLMSynonymRetriever, VectorContextRetriever
@@ -44,9 +41,6 @@ graph_store = Neo4jPropertyGraphStore(
     password=neo4j_password,
     url=neo4j_url
 )
-
-# 创建存储上下文
-storage_context = StorageContext.from_defaults(graph_store=graph_store)
 
 llm_synonym = LLMSynonymRetriever(
     graph_store,
