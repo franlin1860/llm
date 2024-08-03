@@ -16,7 +16,7 @@ class PGSchemaExtractor:
         self.llm = OpenAILike(
             model="deepseek-chat",
             api_base="https://api.deepseek.com/v1",
-            api_key="sk-4944cc4af34148f6a53f74244a48bf8b",
+            api_key="sk-",
             is_chat_model=True,
             temperature=0.1
         )
