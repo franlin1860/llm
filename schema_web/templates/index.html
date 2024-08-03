@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Knowledge Graph Extractor</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</head>
+<body>
+    <h1>Knowledge Graph Extractor</h1>
+    <p>Enter your query and select a schema to extract knowledge graph.</p>
+    <input type="text" id="query" placeholder="Enter your query here">
+    <button id="schema1">Schema 1</button>
+    <button id="schema2">Schema 2</button>
+    <div id="result"></div>
+
+    <script>
+        $(document).ready(function() {
+            function extractKnowledge(schema) {
+                let query = $('#query').val();
+                $('#result').text('Processing...');
+                $.ajax({
+                    url: '/extract',
+                    method: 'POST',
+                    data: JSON.stringify({query: query, schema: schema}),
+                    contentType: 'application/json',
+                    success: function(response) {
+                        $('#result').text(response.message);
+                    },
+                    error: function(error) {
+                        $('#result').text('Error: ' + error.responseText);
+                    }
+                });
+            }
+
+            $('#schema1').click(function() {
+                extractKnowledge('schema1');
+            });
+
+            $('#schema2').click(function() {
+                extractKnowledge('schema2');
+            });
+        });
+    </script>
+</body>
+</html>
